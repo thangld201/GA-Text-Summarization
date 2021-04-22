@@ -1,3 +1,5 @@
+import os
+
 from rouge import Rouge 
 from sacremoses import MosesTokenizer
 
@@ -12,17 +14,15 @@ def summarize(dictionary, corpus, threshold):
         for line in corpus_lines:
 
             line_tok = tokenizer.tokenize(line)
-            line_lower = line_tok.lower()
-            line_arr = line_lower.split()
 
             sentence_score = 0.0
-            for word in line_arr:
-                if word in dictionary:
-                    sentence_score += dictionary[word]
+            for word in line_tok:
+                if word.lower() in dictionary:
+                    sentence_score += dictionary[word.lower()]
                 else:
                     sentence_score += 0.0
             if sentence_score > threshold:
-                summary.add(line)
+                summary.append(line)
 
     return summary
 
@@ -35,3 +35,13 @@ def score(summary, reference):
     return avg / len(reference)
 
 def evaluate(dictionary, corpus, reference, threshold):
+
+    if corpus == "train":
+        for file in os.listdir("dataset/body"):
+            filename = f"dataset/body/{os.fsdecode(file)}"
+
+            summary = summarize(dictionary, filename, 0.0)
+            print(summary)
+            break
+
+    return {0.0}

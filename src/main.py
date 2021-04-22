@@ -1,8 +1,8 @@
 import random
 
 from deap import creator, base, tools, algorithms
-#from ga import evaluate
-from dictionary import read_vocab
+from ga import evaluate
+from dictionary import read_vocab, create_dictionary
 
 # set up objective
 creator.create("ROUGEFitnessMax", base.Fitness, weights=(1.0,))
@@ -22,9 +22,10 @@ toolbox.register("individual", tools.initRepeat, creator.Individual,
 
 # initialize an individual
 ind1 = toolbox.individual()
+dictionary1 = create_dictionary(vocab, ind1)
 
-print(ind1)
+#print(dictionary1)
 
-#ind1.fitness.values = evaluate(ind1)
+ind1.fitness.values = evaluate(dictionary1, "train", "test", 0.0)
 
-#print(ind1.fitness)
+print(ind1.fitness)
