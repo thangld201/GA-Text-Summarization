@@ -1,5 +1,7 @@
 import os
+import numpy as np
 from sacremoses import MosesTokenizer
+
 def read_vocab():
     dictionary = list()
     with open("vocab.txt", "r", encoding='utf-8') as in_file:
@@ -38,4 +40,6 @@ def create_dictionary(words, weights):
 
     return dictionary
 
-#print(read_vocab())
+vocab = read_vocab()
+weights = np.random.rand(len(vocab))
+print(create_dictionary(vocab, weights))
