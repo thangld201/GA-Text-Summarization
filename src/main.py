@@ -1,14 +1,18 @@
 import random
 
 from deap import creator, base, tools, algorithms
-from ga import evaluate
+#from ga import evaluate
+from dictionary import read_vocab
 
 # set up objective
 creator.create("ROUGEFitnessMax", base.Fitness, weights=(1.0,))
 creator.create("Individual", list, fitness=creator.ROUGEFitnessMax)
 
+# read in vocab
+vocab = read_vocab()
+
 # chromosome length
-IND_SIZE=10
+IND_SIZE=len(vocab)
 
 # set up individual
 toolbox = base.Toolbox()
@@ -21,6 +25,6 @@ ind1 = toolbox.individual()
 
 print(ind1)
 
-ind1.fitness.values = evaluate(ind1)
+#ind1.fitness.values = evaluate(ind1)
 
-print(ind1.fitness)
+#print(ind1.fitness)
