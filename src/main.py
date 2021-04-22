@@ -24,8 +24,7 @@ toolbox.register("individual", tools.initRepeat, creator.Individual,
 ind1 = toolbox.individual()
 dictionary1 = create_dictionary(vocab, ind1)
 
-#print(dictionary1)
 
-ind1.fitness.values = evaluate(dictionary1, "train", "test", 0.0)
+ind1.fitness.values = evaluate(dictionary1, "train", 0.6)
 
 print(ind1.fitness)

@@ -22,7 +22,7 @@ def summarize(dictionary, corpus, threshold):
                 if sentence_score / len(line_tok) > threshold:
                     summary.append(line)
                     break
-    print(summary)
+
     return summary
 
 def score_summary(summary, reference_file):
@@ -36,7 +36,7 @@ def score_summary(summary, reference_file):
 
     return avg / len(reference)
 
-def evaluate(dictionary, corpus, reference, threshold):
+def evaluate(dictionary, corpus, threshold):
 
     score = 0.0
 
@@ -44,9 +44,9 @@ def evaluate(dictionary, corpus, reference, threshold):
         for file in os.listdir("dataset/body"):
             filename = f"dataset/body/{os.fsdecode(file)}"
 
-            summary = summarize(dictionary, filename, 0.6)
+            summary = summarize(dictionary, filename, threshold)
             score += score_summary(summary, f"dataset/highlights/{os.fsdecode(file)}")
             
             break
 
-    return {score}
+    return {score / len(dictionary)}
