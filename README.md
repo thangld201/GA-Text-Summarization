@@ -3,9 +3,5 @@
 ## Install Dependencies
 
 ```
-pip install deap
-```
-
-```
-pip install rouge
+pip install requirements.txt
 ```
