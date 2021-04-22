@@ -1,6 +1,14 @@
 import os
 from sacremoses import MosesTokenizer
-#def read_vocab():
+def read_vocab():
+    dictionary = list()
+    with open("vocab.txt", "r", encoding='utf-8') as in_file:
+        vocab_lines = in_file.readlines()
+
+        for line in vocab_lines:
+            dictionary.append(line.rstrip())
+
+    return dictionary
 
 def build_vocab():
     vocab_file = "vocab.txt"
@@ -30,4 +38,4 @@ def create_dictionary(words, weights):
 
     return dictionary
 
-build_vocab()
+#print(read_vocab())
