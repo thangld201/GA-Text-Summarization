@@ -3,6 +3,23 @@ import os
 from rouge import Rouge 
 from sacremoses import MosesTokenizer
 
+def load_corpus(mode):
+    articles = list()
+    highlights = list()
+
+
+    for in_file in os.listdir(f"dataset/{mode}/body"):
+
+        filename = f"dataset/train/{mode}/{os.fsdecode(in_file)}"
+        articles.append(open(filename, 'r', encoding='utf-8').readlines())
+
+    for in_file in os.listdir(f"dataset/{mode}/highlights"):
+
+        filename = f"dataset/{mode}/highlights/{os.fsdecode(in_file)}"
+        highlights.append(open(filename, 'r', encoding='utf-8').readlines())
+
+    return articles, highlights
+
 def summarize(dictionary, corpus, threshold):
 
     tokenizer = MosesTokenizer(lang='en')
@@ -41,11 +58,11 @@ def evaluate(dictionary, corpus, threshold):
     score = 0.0
 
     if corpus == "train":
-        for file in os.listdir("dataset/body"):
+        for in_file in os.listdir("dataset/body"):
             filename = f"dataset/body/{os.fsdecode(file)}"
 
             summary = summarize(dictionary, filename, threshold)
-            score += score_summary(summary, f"dataset/highlights/{os.fsdecode(file)}")
+            score += score_summary(summary, f"dataset/highlights/{os.fsdecode(in_file)}")
             
             break
 
