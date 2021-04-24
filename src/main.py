@@ -28,6 +28,7 @@ POP_SIZE = 100
 pop = list()
 for i in range(POP_SIZE):
     pop.append(toolbox.individual())
+    #print(pop[0] == pop[i])
 
 print("Population Initialized")
 
@@ -37,8 +38,10 @@ MUTPB = 0.05
 toolbox.register("mate", tools.cxTwoPoint)
 toolbox.register("select", tools.selTournament, tournsize=5)
 
-num_generations = 100
-threshold = 0.2
+num_generations = 50
+threshold = 0.6
+max_score = 0
+max_ind = None
 for i in range(num_generations):
     print(f"Generation: {i}")
     # Select the next generation individuals
@@ -65,6 +68,13 @@ for i in range(num_generations):
     invalid_ind = [ind for ind in offspring if not ind.fitness.valid]
     for ind in invalid_ind:
         ind.fitness.values = evaluate_ga(vocab, ind, articles, highlights, threshold)
+        print(ind.fitness.values)
+        if max_score < ind.fitness.values[0]:
+            max_score = ind.fitness.values[0]
+            max_ind = ind
 
     # The population is entirely replaced by the offspring
     pop[:] = offspring
+
+print(max_score)
+print(max_ind)

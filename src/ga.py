@@ -50,8 +50,9 @@ def score_summary(summary, reference):
         return 0
 
     for i in range(length):
-        scores = rouge.get_scores(summary[i], reference[i])
-        avg += scores[0]["rouge-1"]["f"]
+        if i <len(summary):
+            scores = rouge.get_scores(summary[i], reference[i])
+            avg += scores[0]["rouge-1"]["f"]
 
     return avg / len(reference)
 
