@@ -40,7 +40,7 @@ MUTPB = 0.05
 toolbox.register("mate", tools.cxTwoPoint)
 toolbox.register("select", tools.selTournament, tournsize=5)
 
-num_generations = 15
+num_generations = 1
 threshold = 0.6
 max_score = 0
 max_ind = None
@@ -111,10 +111,10 @@ plt.plot(average_chart)
 plt.xlabel('Generation')
 plt.ylabel('Fitness')
 plt.title("Average Fitness per Generation")
-plt.show()
+plt.savefig('results/average_fitness.png')
 
 plt.plot(best_chart)
 plt.xlabel('Generation')
 plt.ylabel('Fitness')
 plt.title("Best Fitness per Generation")
-plt.show()
+plt.savefig('results/best_fitness.png')
