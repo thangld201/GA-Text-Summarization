@@ -38,7 +38,7 @@ MUTPB = 0.05
 toolbox.register("mate", tools.cxTwoPoint)
 toolbox.register("select", tools.selTournament, tournsize=5)
 
-num_generations = 50
+num_generations = 3
 threshold = 0.6
 max_score = 0
 max_ind = None
@@ -76,5 +76,9 @@ for i in range(num_generations):
     # The population is entirely replaced by the offspring
     pop[:] = offspring
 
-print(max_score)
-print(max_ind)
+
+print(f"Best Fitness: {max_score}")
+
+with open(f"results/best.txt", 'w', encoding='utf-8') as out_file:
+    for num in max_ind:
+        out_file.write(f"{num}\n")

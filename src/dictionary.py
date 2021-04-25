@@ -39,9 +39,3 @@ def create_dictionary(words, weights):
         dictionary[words[i]] = weights[i]
 
     return dictionary
-
-'''
-vocab = read_vocab()
-weights = np.random.rand(len(vocab))
-print(create_dictionary(vocab, weights))
-'''

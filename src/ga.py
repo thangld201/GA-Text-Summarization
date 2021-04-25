@@ -4,6 +4,13 @@ from rouge import Rouge
 from sacremoses import MosesTokenizer
 from dictionary import create_dictionary
 
+def concat_sentences(arr):
+    string = ""
+    for line in arr:
+        string = string + " " + line
+
+    return string
+
 def load_corpus(mode):
     articles = list()
     highlights = list()
@@ -17,7 +24,7 @@ def load_corpus(mode):
     for in_file in os.listdir(f"dataset/{mode}/highlights"):
 
         filename = f"dataset/{mode}/highlights/{os.fsdecode(in_file)}"
-        highlights.append(open(filename, 'r', encoding='utf-8').readlines())
+        highlights.append(concat_sentences(open(filename, 'r', encoding='utf-8').readlines()))
         break
 
     return articles, highlights
@@ -49,12 +56,12 @@ def score_summary(summary, reference):
     if len(summary) <= 0:
         return 0
 
-    for i in range(length):
-        if i <len(summary):
-            scores = rouge.get_scores(summary[i], reference[i])
-            avg += scores[0]["rouge-1"]["f"]
+    summary = concat_sentences(summary)
 
-    return avg / len(reference)
+    scores = rouge.get_scores(summary, reference)
+    avg += scores[0]["rouge-1"]["f"]
+
+    return avg 
 
 def evaluate(dictionary, articles, highlights, threshold):
 
@@ -66,7 +73,7 @@ def evaluate(dictionary, articles, highlights, threshold):
 
         break
 
-    return {score / length}
+    return {score }
 
 def evaluate_ga(vocab, individual, articles, highlights, threshold):
     dictionary = create_dictionary(vocab, individual)
