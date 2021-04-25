@@ -15,17 +15,25 @@ def load_corpus(mode):
     articles = list()
     highlights = list()
 
+    i = 0
     for in_file in os.listdir(f"dataset/{mode}/body"):
 
         filename = f"dataset/{mode}/body/{os.fsdecode(in_file)}"
         articles.append(open(filename, 'r', encoding='utf-8').readlines())
-        break
+        i += 1
 
+        if i == 100:
+            break
+        
+    i = 0
     for in_file in os.listdir(f"dataset/{mode}/highlights"):
 
         filename = f"dataset/{mode}/highlights/{os.fsdecode(in_file)}"
         highlights.append(concat_sentences(open(filename, 'r', encoding='utf-8').readlines()))
-        break
+        i += 1
+
+        if i == 100:
+            break
 
     return articles, highlights
 
@@ -59,21 +67,20 @@ def score_summary(summary, reference):
     summary = concat_sentences(summary)
 
     scores = rouge.get_scores(summary, reference)
-    avg += scores[0]["rouge-1"]["f"]
+    avg = scores[0]["rouge-1"]["f"] + scores[0]["rouge-1"]["p"] + scores[0]["rouge-1"]["r"]
 
-    return avg 
+    return (avg / 3) * 100 
 
 def evaluate(dictionary, articles, highlights, threshold):
 
     score = 0.0
     length = len(articles)
+
     for i in range(length):
         summary = summarize(dictionary, articles[i], threshold)
         score += score_summary(summary, highlights[i])
 
-        break
-
-    return {score }
+    return {score / len(articles)}
 
 def evaluate_ga(vocab, individual, articles, highlights, threshold):
     dictionary = create_dictionary(vocab, individual)
