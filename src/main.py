@@ -61,15 +61,13 @@ for i in range(num_generations):
             toolbox.mate(child1, child2)
             del child1.fitness.values
             del child2.fitness.values
-
     print("Mating done")
+
     # Apply mutation on the offspring
-    '''
     for mutant in offspring:
         if random.random() < MUTPB:
-            toolbox.mutate(mutant)
+            mutant[int(random.random() * IND_SIZE)] = 0
             del mutant.fitness.values
-    '''
 
     # Evaluate the individuals with an invalid fitness
     invalid_ind = [ind for ind in offspring if not ind.fitness.valid]
