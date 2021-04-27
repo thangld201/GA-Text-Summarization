@@ -13,7 +13,7 @@ creator.create("Individual", list, fitness=creator.ROUGEFitnessMax)
 # read in vocab and dataset
 vocab = read_vocab()
 print("vocabulary loaded")
-articles, highlights = load_corpus("test")
+articles, highlights = load_corpus("train")
 print("dataset loaded")
 
 # chromosome length
@@ -40,7 +40,7 @@ MUTPB = 0.05
 toolbox.register("mate", tools.cxTwoPoint)
 toolbox.register("select", tools.selTournament, tournsize=5)
 
-num_generations = 1
+num_generations = 15
 threshold = 0.6
 max_score = 0
 max_ind = None
@@ -110,6 +110,8 @@ plt.xlabel('Generation')
 plt.ylabel('Fitness')
 plt.title("Average Fitness per Generation")
 plt.savefig('results/average_fitness.png')
+
+plt.clf()
 
 plt.plot(best_chart)
 plt.xlabel('Generation')

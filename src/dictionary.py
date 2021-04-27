@@ -4,7 +4,7 @@ from sacremoses import MosesTokenizer
 
 def read_vocab():
     dictionary = list()
-    with open("vocab.txt", "r", encoding='utf-8') as in_file:
+    with open("vocab_50.txt", "r", encoding='utf-8') as in_file:
         vocab_lines = in_file.readlines()
 
         for line in vocab_lines:
@@ -13,14 +13,15 @@ def read_vocab():
     return dictionary
 
 def build_vocab():
-    vocab_file = "vocab.txt"
+    vocab_file = "vocab_50.txt"
     vocab_list = list()
     tokenizer = MosesTokenizer(lang='en')
 
-    for file in os.listdir("dataset/body"):
+    i = 0
+    for file in os.listdir("dataset/train/body"):
         filename = os.fsdecode(file)
 
-        with open(f"dataset/body/{filename}", 'r', encoding='utf-8') as in_file:
+        with open(f"dataset/train/body/{filename}", 'r', encoding='utf-8') as in_file:
             corpus_lines = in_file.readlines()
             corpus_lines = tokenizer.tokenize(corpus_lines)
 
@@ -28,6 +29,10 @@ def build_vocab():
                 for word in line.split():
                     if word.lower() not in vocab_list:
                         vocab_list.append(word.lower())
+
+        i += 1
+        if i >= 1000:
+            break
 
     with open(vocab_file, 'w', encoding='utf-8') as out_file:
         for word in vocab_list:
@@ -39,3 +44,5 @@ def create_dictionary(words, weights):
         dictionary[words[i]] = weights[i]
 
     return dictionary
+
+build_vocab()
