@@ -22,7 +22,7 @@ def load_corpus(mode):
         articles.append(open(filename, 'r', encoding='utf-8').readlines())
         i += 1
 
-        if i == 50:
+        if i == 100:
             break
         
     i = 0
@@ -32,7 +32,7 @@ def load_corpus(mode):
         highlights.append(concat_sentences(open(filename, 'r', encoding='utf-8').readlines()))
         i += 1
 
-        if i == 50:
+        if i == 100:
             break
 
     return articles, highlights

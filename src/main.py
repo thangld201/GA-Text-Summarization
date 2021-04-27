@@ -11,7 +11,7 @@ creator.create("ROUGEFitnessMax", base.Fitness, weights=(1.0,))
 creator.create("Individual", list, fitness=creator.ROUGEFitnessMax)
 
 # read in vocab and dataset
-vocab = read_vocab()
+vocab = read_vocab(50)
 print("vocabulary loaded")
 articles, highlights = load_corpus("train")
 print("dataset loaded")

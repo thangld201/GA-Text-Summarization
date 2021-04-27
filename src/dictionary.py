@@ -2,9 +2,9 @@ import os
 import numpy as np
 from sacremoses import MosesTokenizer
 
-def read_vocab():
+def read_vocab(num):
     dictionary = list()
-    with open("vocab_50.txt", "r", encoding='utf-8') as in_file:
+    with open(f"vocab_{num}.txt", "r", encoding='utf-8') as in_file:
         vocab_lines = in_file.readlines()
 
         for line in vocab_lines:
@@ -12,8 +12,8 @@ def read_vocab():
 
     return dictionary
 
-def build_vocab():
-    vocab_file = "vocab_50.txt"
+def build_vocab(num):
+    vocab_file = f"vocab_{num}.txt"
     vocab_list = list()
     tokenizer = MosesTokenizer(lang='en')
 
@@ -45,4 +45,4 @@ def create_dictionary(words, weights):
 
     return dictionary
 
-build_vocab()
+#build_vocab()
