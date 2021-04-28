@@ -8,7 +8,7 @@ pip install requirements.txt
 
 ## Format Dataset
 
-This splits the dataset into a body (the actual article) and highlights (the summary). Does not split dataset into training and testing.
+This splits the corpus in the stories folder into a body (the actual article) and highlights (the summary). Does not split dataset into training and testing.
 ```
 cd src
 python dataset.py
