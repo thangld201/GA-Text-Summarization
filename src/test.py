@@ -1,7 +1,7 @@
 from ga import evaluate_ga, load_corpus
 from dictionary import read_vocab, create_dictionary
 
-vocab = read_vocab("1000")
+vocab = read_vocab("all")
 articles, highlights = load_corpus("test")
 threshold = 0.6
 print("dataset loaded")
