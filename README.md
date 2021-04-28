@@ -1,5 +1,7 @@
 # GA-Text-Summarization
 
+Extractive text summarization using genetic algorithms.
+
 ## Install Dependencies
 
 ```
