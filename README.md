@@ -31,7 +31,7 @@ cd src
 python main.py
 ```
 
-# Test Model
+## Test Model
 ```
 cd src
 python test.py
