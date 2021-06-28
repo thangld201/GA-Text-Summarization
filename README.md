@@ -1,6 +1,18 @@
 # GA-Text-Summarization
 
-Extractive text summarization using genetic algorithms.
+[Extractive text summarization using genetic algorithms](https://arxiv.org/abs/2105.02365)
+
+If you found our code useful for research, please use the following BibTeX entry for citation.
+```BibTeX
+@misc{chen2021genetic,
+      title={Genetic Algorithms For Extractive Summarization}, 
+      author={William Chen and Kensal Ramos and Kalyan Naidu Mullaguri},
+      year={2021},
+      eprint={2105.02365},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
+}
+```
 
 ## Install Dependencies
 
